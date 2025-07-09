@@ -1,14 +1,11 @@
 MESSAGES = {
     "welcome": "👋🤖 Welcome to the assistant bot!",
     "prompt": "👉 Enter a command: ",
-    "goodbye": "👋🤖 Good bye!",
+    "goodbye": "\n👋🤖 Good bye!",
     "greeting": "🖐️ How can I help you?",
     "invalid": "❓ Invalid command.",
     "add_success": "✅ Contact added.",
-    "add_fail": "❌ Please provide both a name and a phone number.",
     "change_success": "🔄 Contact updated.",
-    "change_fail_args": "❌ Please provide a name and a new phone number.",
-    "phone_fail_args": "❌ Please provide a name.",
     "phone_found": lambda name, phone: f"📞 {name}'s phone number is {phone}",
     "contact_not_found": "❌ Contact not found.",
     "all_empty": "📭 No contacts found.",
@@ -24,4 +21,12 @@ MESSAGES = {
         "  help or -h             - Show this help message\n"
         "  close or exit          - Exit the assistant\n"
     ),
+}
+
+ERROR_MESSAGES = {
+    "KeyError": "Enter user name.",
+    "ValueError": "Invalid input. Expected: name and phone.",
+    "IndexError": "Missing arguments. Please enter a user name.",
+    "TypeError": "Invalid argument type or count.",
+    "Unexpected": lambda e: f"😱 Unexpected error: {str(e)}",
 }

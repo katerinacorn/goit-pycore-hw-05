@@ -1,25 +1,17 @@
 from messages import MESSAGES
+from decorators import input_error
+from utils import parse_input
 
 
-def parse_input(user_input):
-    parts = user_input.strip().split()
-    if not parts:
-        return "", []
-    cmd, *args = parts
-    return cmd.lower(), args
-
-
+@input_error
 def add_contact(args, contacts):
-    if len(args) != 2:
-        return MESSAGES["add_fail"]
     name, phone = args
     contacts[name] = phone
     return MESSAGES["add_success"]
 
 
+@input_error
 def change_contact(args, contacts):
-    if len(args) != 2:
-        return MESSAGES["change_fail_args"]
     name, phone = args
     if name in contacts:
         contacts[name] = phone
@@ -28,9 +20,8 @@ def change_contact(args, contacts):
         return MESSAGES["contact_not_found"]
 
 
+@input_error
 def show_phone(args, contacts):
-    if len(args) != 1:
-        return MESSAGES["phone_fail_args"]
     name = args[0]
     if name in contacts:
         return MESSAGES["phone_found"](name, contacts[name])
@@ -38,6 +29,7 @@ def show_phone(args, contacts):
         return MESSAGES["contact_not_found"]
 
 
+@input_error
 def show_all(contacts):
     if not contacts:
         return MESSAGES["all_empty"]
@@ -47,6 +39,7 @@ def show_all(contacts):
     return "\n".join(result)
 
 
+@input_error
 def show_help():
     return MESSAGES["help"]
 
@@ -85,4 +78,4 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n👋🤖 Good bye!")
+        print(MESSAGES["goodbye"])
